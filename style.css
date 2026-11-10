@@ -175,9 +175,12 @@ h1 {
   position: relative;
   z-index: 1;
   margin-top: 16px;
-  padding-top: 18px;
+  padding: 18px 18px 16px;
   border-top: 1px solid rgba(114, 67, 25, 0.35);
   display: none;
+  background: rgba(254, 234, 199, 0.38);
+  border: 1px solid rgba(114, 67, 25, 0.2);
+  border-radius: 18px;
 }
 
 .caixa-resultado.mostrar {
@@ -190,6 +193,18 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 0;
   color: var(--c1);
+}
+
+.imagem-resultado {
+  display: none;
+  width: min(300px, 78%);
+  max-height: 220px;
+  object-fit: contain;
+  margin: 0 auto 14px;
+  border-radius: 14px;
+  background: transparent;
+  box-shadow: none;
+  border: none;
 }
 
 .texto-resultado {

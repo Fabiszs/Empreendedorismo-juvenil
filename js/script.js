@@ -4,6 +4,7 @@ import { aleatorio, nome } from "./aleatorio.js";
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector(".caixa-resultado");
+const imagemResultado = document.querySelector(".imagem-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
 const tituloResultado = document.querySelector(".titulo-resultado");
 const telaInicial = document.querySelector(".tela-inicial");
@@ -41,6 +42,8 @@ function reiniciaJogo() {
   caixaAlternativas.replaceChildren();
   tituloResultado.textContent = "";
   textoResultado.textContent = "";
+  imagemResultado.src = "";
+  imagemResultado.style.display = "none";
 
   telaInicial.style.display = "block";
   caixaPerguntas.style.display = "none";
@@ -123,6 +126,9 @@ function mostraGameOver(mensagem) {
   caixaAlternativas.style.display = "none";
   caixaResultado.style.display = "block";
   tituloResultado.textContent = "GAME OVER";
+  imagemResultado.src = "imagem/fracasso.png";
+  imagemResultado.alt = "Ilustração de fracasso";
+  imagemResultado.style.display = "block";
   textoResultado.textContent = mensagem + "\n\nSuas escolhas nesta tentativa:\n" + historiaFinal;
   botaoJogarNovamente.textContent = "Recomeçar do início";
   botaoJogarNovamente.style.display = "inline-block";
@@ -141,6 +147,9 @@ function mostraVitoria(mensagem) {
   caixaAlternativas.style.display = "none";
   caixaResultado.style.display = "block";
   tituloResultado.textContent = "THE END";
+  imagemResultado.src = "imagem/sucesso.png";
+  imagemResultado.alt = "Ilustração de sucesso";
+  imagemResultado.style.display = "block";
   textoResultado.textContent = mensagem + "\n\nSeu percurso nesta partida:\n" + historiaFinal;
   botaoJogarNovamente.style.display = "none";
   botaoCreditos.style.display = "inline-block";
