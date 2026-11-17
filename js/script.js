@@ -17,6 +17,7 @@ const botaoVoltarInicio = document.querySelector(".voltar-inicio-btn");
 let atual = 0;
 let historiaFinal = "";
 let faseDaPartida = "inicio";
+let erros = 0;
 
 botaoIniciar.addEventListener("click", iniciaJogo);
 botaoJogarNovamente.addEventListener("click", reiniciaJogo);
@@ -37,6 +38,7 @@ function reiniciaJogo() {
   atual = 0;
   historiaFinal = "";
   faseDaPartida = "inicio";
+  erros = 0;
 
   caixaPerguntas.textContent = "";
   caixaAlternativas.replaceChildren();
@@ -57,15 +59,10 @@ function reiniciaJogo() {
 function mostraPergunta() {
   const perguntaAtual = perguntas[atual];
 
-  if (perguntaAtual.final === "vitoria") {
-    mostraVitoria(perguntaAtual.enunciado);
-    return;
-  }
-
   caixaPerguntas.textContent = perguntaAtual.enunciado.replace(/você/gi, nome);
   caixaAlternativas.replaceChildren();
 
-  for (const alternativa of perguntaAtual.alternativas) {
+  for (const alternativa of embaralha(perguntaAtual.alternativas)) {
     const botao = document.createElement("button");
     botao.textContent = alternativa.texto;
     botao.disabled = alternativa.disponivel === false;
@@ -85,38 +82,43 @@ function respostaSelecionada(opcaoSelecionada) {
     return;
   }
 
-  if (opcaoSelecionada.tipo === "gameover") {
-    const afirmacao = aleatorio(opcaoSelecionada.afirmacao);
-    historiaFinal += afirmacao + " ";
-    mostraGameOver(opcaoSelecionada.mensagem);
-    return;
-  }
-
-  const destino = opcaoSelecionada.proxima;
-
-  if (!Number.isInteger(destino) || perguntas[destino] === undefined) {
-    console.error("Destino inválido:", destino);
-    return;
-  }
-
-  const origem = perguntas[atual];
-  const chegada = perguntas[destino];
-  const mudouDeCaminho = origem.caminho !== chegada.caminho;
-
-  if (atual !== 0 && mudouDeCaminho && opcaoSelecionada.tipo !== "trocar") {
-    console.error("Mudança de caminho sem o tipo trocar.");
-    return;
-  }
-
-  if (opcaoSelecionada.tipo === "trocar" && !mudouDeCaminho) {
-    console.error("A troca deve levar a outro caminho.");
-    return;
+  const escolhaDeRisco = opcaoSelecionada.tipo === "gameover";
+  if (escolhaDeRisco) {
+    erros += 1;
   }
 
   const afirmacao = aleatorio(opcaoSelecionada.afirmacao);
   historiaFinal += afirmacao + " ";
-  atual = destino;
+
+  if (atual === perguntas.length - 1) {
+    if (erros >= 3) {
+      mostraGameOver(
+        "As decisões de risco se acumularam durante as 10 etapas e a empresa entrou em falência.",
+      );
+    } else {
+      mostraVitoria(
+        "Você concluiu as 10 etapas, apresentou sua ideia na feira e mostrou como ela atende a uma necessidade real. Missão cumprida: você venceu!",
+      );
+    }
+    return;
+  }
+
+  atual += 1;
   mostraPergunta();
+}
+
+function embaralha(alternativas) {
+  const resultado = [...alternativas];
+
+  for (let indice = resultado.length - 1; indice > 0; indice -= 1) {
+    const outroIndice = Math.floor(Math.random() * (indice + 1));
+    [resultado[indice], resultado[outroIndice]] = [
+      resultado[outroIndice],
+      resultado[indice],
+    ];
+  }
+
+  return resultado;
 }
 
 function mostraGameOver(mensagem) {
@@ -137,7 +139,7 @@ function mostraGameOver(mensagem) {
 }
 
 function mostraVitoria(mensagem) {
-  if (faseDaPartida !== "jogando" || perguntas[atual].final !== "vitoria") {
+  if (faseDaPartida !== "jogando") {
     return;
   }
 
@@ -170,5 +172,3 @@ function mostraCreditos() {
 }
 
 reiniciaJogo();
-
-JS>ALEATORIO
