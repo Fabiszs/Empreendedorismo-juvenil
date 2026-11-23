@@ -92,9 +92,7 @@ h1 {
 }
 
 .iniciar-btn,
-.novamente-btn,
-.creditos-btn,
-.voltar-inicio-btn {
+.novamente-btn {
   border: 1px solid var(--c1);
   border-radius: 12px;
   background: var(--c4);
@@ -114,9 +112,7 @@ h1 {
 }
 
 .iniciar-btn:hover,
-.novamente-btn:hover,
-.creditos-btn:hover,
-.voltar-inicio-btn:hover {
+.novamente-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.02);
 }
@@ -215,34 +211,7 @@ h1 {
   line-height: 1.7;
 }
 
-.tela-creditos {
-  position: relative;
-  z-index: 1;
-  display: none;
-  text-align: center;
-  line-height: 1.7;
-  color: var(--c1);
-  background: var(--c4);
-  border: 1px solid rgba(114, 67, 25, 0.2);
-  border-radius: 14px;
-  padding: 18px 16px;
-}
-
-.tela-creditos h2 {
-  margin: 0 0 12px;
-  font-size: 2rem;
-  color: var(--c1);
-}
-
-.tela-creditos p {
-  margin: 10px 0;
-}
-
-.creditos-btn {
-  display: none;
-}
-
-h1, h2, .caixa-perguntas, .caixa-resultado, .tela-creditos {
+h1, h2, .caixa-perguntas, .caixa-resultado {
   font-family: "Bree Serif", serif;
 }
 
@@ -273,8 +242,7 @@ body {
 }
 
 h1,
-.titulo-resultado,
-.tela-creditos h2 {
+.titulo-resultado {
   color: var(--c4);
   letter-spacing: 0;
 }
@@ -284,9 +252,7 @@ h1,
 }
 
 .iniciar-btn,
-.novamente-btn,
-.creditos-btn,
-.voltar-inicio-btn {
+.novamente-btn {
   border-color: var(--c1);
   background: var(--c4);
   color: var(--c1);
@@ -317,15 +283,5 @@ h1,
 }
 
 .texto-resultado {
-  color: var(--c1);
-}
-
-.tela-creditos {
-  background: var(--c4);
-  border-color: rgba(114, 67, 25, 0.2);
-  color: var(--c1);
-}
-
-.tela-creditos h2 {
   color: var(--c1);
 }

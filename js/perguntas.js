@@ -1,210 +1,304 @@
 export const perguntas = [
   {
     enunciado:
-      "Você e seus amigos querem criar um negócio, mas ainda não sabem por onde começar. Muitos alunos reclamam que não encontram lanches saudáveis e baratos. Qual é seu primeiro passo?",
+      "Ao sair da escola, você e seus colegas percebem que muitos estudantes procuram lanches saudáveis e acessíveis. Qual é sua primeira atitude?",
     alternativas: [
       {
-        texto: "Conversar com os estudantes para entender o que precisam e se comprariam essa ideia.",
-        afirmacao: ["Investigou uma necessidade real antes de planejar o negócio."],
-        tipo: "avancar",
+        texto: "Quero criar uma pequena ideia de negócio e testar um produto.",
+        afirmacao: ["Decidiu experimentar uma ideia de negócio com um produto."],
+        tipo: "entrada",
+        proxima: 1,
       },
       {
-        texto: "Gastar toda a sua economia produzindo lanches sem saber se alguém quer comprar.",
-        afirmacao: ["Investiu sem conhecer os clientes e colocou o negócio em risco."],
-        tipo: "gameover",
-      },
-      {
-        texto: "Perguntar a alguns colegas quais lanches saudáveis eles gostariam de encontrar.",
-        afirmacao: ["Começou ouvindo possíveis clientes para conhecer suas preferências."],
-        tipo: "salto",
+        texto: "Quero entender melhor as necessidades e as regras antes de investir.",
+        afirmacao: ["Decidiu investigar as necessidades e as regras antes de investir."],
+        tipo: "entrada",
+        proxima: 2,
       },
     ],
   },
   {
+    caminho: "A",
     enunciado:
-      "As conversas confirmam que muitos alunos querem opções melhores para o intervalo. Como descobrir se sua ideia pode virar um negócio?",
+      "Você começa a planejar um lanche saudável para apresentar na escola. Como pretende dar o primeiro passo?",
     alternativas: [
       {
-        texto: "Pesquisar sabores, preços e frequência de compra entre os estudantes.",
-        afirmacao: ["Pesquisou os clientes e reuniu dados para orientar a ideia."],
+        texto: "Preparar um protótipo simples e pedir a opinião de alguns estudantes.",
+        afirmacao: ["Preparou um protótipo simples e ouviu possíveis clientes."],
         tipo: "avancar",
+        proxima: 3,
       },
       {
-        texto: "Montar uma pequena degustação e pedir opiniões sinceras antes de vender.",
-        afirmacao: ["Testou a ideia com clientes antes de investir."],
+        texto: "Pesquisar custos e comparar opções de ingredientes antes do teste.",
+        afirmacao: ["Pesquisou os custos e comparou ingredientes antes de testar a ideia."],
         tipo: "salto",
+        proxima: 4,
       },
       {
-        texto: "Escolher o cardápio e o preço no chute, sem conversar com ninguém.",
-        afirmacao: ["Tomou decisões sem conhecer os clientes nem testar a proposta."],
-        tipo: "gameover",
+        texto: "Investigar as necessidades do bairro e as regras para uma iniciativa estudantil.",
+        afirmacao: ["Ampliou a pesquisa para as necessidades do bairro e as regras locais."],
+        tipo: "trocar",
+        proxima: 2,
+        disponivel: true,
       },
     ],
   },
   {
+    caminho: "B",
     enunciado:
-      "A pesquisa mostra que os alunos querem lanches acessíveis, mas têm preferências diferentes. Como decidir o que oferecer primeiro?",
+      "Antes de investir, você recebe uma mensagem dizendo que a escola proibirá projetos de venda dos estudantes. O que pretende fazer?",
     alternativas: [
       {
-        texto: "Comparar as respostas e escolher poucas opções dentro do orçamento.",
-        afirmacao: ["Analisou os dados e priorizou opções viáveis para os clientes."],
+        texto: "Confirmar a informação com a direção e consultar as regras da escola.",
+        afirmacao: ["Verificou a informação com a direção e consultou as regras da escola."],
         tipo: "avancar",
+        proxima: 7,
       },
       {
-        texto: "Voltar à pesquisa e esclarecer as respostas que ficaram confusas.",
-        afirmacao: ["Revisou a pesquisa para tomar uma decisão mais informada."],
+        texto: "Começar uma pesquisa sobre as necessidades dos estudantes e do bairro.",
+        afirmacao: ["Começou uma pesquisa sobre as necessidades da comunidade."],
         tipo: "salto",
+        proxima: 8,
       },
       {
-        texto: "Comprar ingredientes caros para um cardápio enorme sem calcular os custos.",
-        afirmacao: ["Ignorou os custos e assumiu um risco financeiro desnecessário."],
-        tipo: "gameover",
+        texto: "Transformar a pesquisa em um protótipo de produto para testar na escola.",
+        afirmacao: ["Transformou a pesquisa em um protótipo para testar a ideia de negócio."],
+        tipo: "trocar",
+        proxima: 1,
+        disponivel: true,
       },
     ],
   },
   {
+    caminho: "A",
     enunciado:
-      "Você escolheu um produto para testar. Como calcular um preço que cubra os gastos e continue acessível?",
+      "As primeiras opiniões ajudam, mas algumas informações sobre os ingredientes e seus benefícios ainda não têm fonte. Como você vai continuar?",
     alternativas: [
       {
-        texto: "Anotar os custos, estimar o preço e conferir com os clientes.",
-        afirmacao: ["Calculou os custos e testou um preço adequado para o público."],
+        texto: "Pesquisar fontes confiáveis e conferir cada informação antes de usá-la.",
+        afirmacao: ["Conferiu as informações do projeto em fontes confiáveis."],
         tipo: "avancar",
+        proxima: 4,
       },
       {
-        texto: "Começar com um lote pequeno, registrar os gastos e ajustar o preço.",
-        afirmacao: ["Planejou um teste pequeno e acompanhou os gastos do negócio."],
+        texto: "Voltar aos estudantes e esclarecer as respostas que ficaram incompletas.",
+        afirmacao: ["Retomou a pesquisa para esclarecer respostas incompletas."],
         tipo: "salto",
+        proxima: 1,
       },
       {
-        texto: "Cobrar qualquer valor sem calcular os gastos.",
-        afirmacao: ["Definiu o preço sem controle dos custos."],
+        texto: "Inventar uma fonte e apresentá-la como verdadeira.",
+        afirmacao: ["Inventou uma fonte para sustentar uma informação."],
         tipo: "gameover",
+        proxima: 4,
+        disponivel: true,
+        mensagem:
+          "Uma fonte inventada comprometeu a confiança no projeto. Você precisa recomeçar.",
       },
     ],
   },
   {
+    caminho: "A",
     enunciado:
-      "O primeiro teste recebeu sugestões de opções vegetarianas e embalagens com menos lixo. Como melhorar a oferta?",
+      "Você vai planejar uma demonstração do produto. Como mostrar que a ideia é viável e responsável?",
     alternativas: [
       {
-        texto: "Atualizar o cardápio e buscar embalagens adequadas sem ultrapassar o orçamento.",
-        afirmacao: ["Aprimorou o produto com base nas sugestões e nos limites do negócio."],
+        texto: "Apresentar o protótipo, os custos e as opiniões coletadas.",
+        afirmacao: ["Planejou uma demonstração com protótipo, custos e opiniões reais."],
         tipo: "avancar",
+        proxima: 5,
       },
       {
-        texto: "Perguntar quais sugestões são mais importantes antes de mudar tudo.",
-        afirmacao: ["Priorizou o feedback dos clientes antes de fazer mudanças."],
+        texto: "Organizar uma pequena produção e calcular os materiais necessários.",
+        afirmacao: ["Organizou uma produção pequena e calculou os materiais necessários."],
         tipo: "salto",
+        proxima: 6,
       },
       {
-        texto: "Prometer opções que ainda não consegue produzir e ignorar as sugestões.",
-        afirmacao: ["Fez promessas sem capacidade de cumprir e ignorou os clientes."],
-        tipo: "gameover",
+        texto: "Convidar a comunidade para pesquisar em conjunto as necessidades do bairro.",
+        afirmacao: ["Convidou a comunidade a participar da pesquisa de necessidades."],
+        tipo: "trocar",
+        proxima: 8,
+        disponivel: true,
       },
     ],
   },
   {
-    enunciado: "O produto está pronto para um novo teste. O que organizar antes de vender?",
-    alternativas: [
-      {
-        texto: "Definir quantidade, custos, tarefas, higiene e como registrar as vendas.",
-        afirmacao: ["Organizou a produção, os custos e as responsabilidades para começar com segurança."],
-        tipo: "avancar",
-      },
-      {
-        texto: "Revisar o plano e confirmar se o preço cobre os gastos.",
-        afirmacao: ["Revisou o plano e conferiu os custos antes de vender."],
-        tipo: "salto",
-      },
-      {
-        texto: "Começar sem combinar tarefas, calcular quantidades ou verificar as regras da escola.",
-        afirmacao: ["Começou sem planejamento e deixou de verificar as regras do local."],
-        tipo: "gameover",
-      },
-    ],
-  },
-  {
-    enunciado: "Como dividir o trabalho para evitar atrasos e desperdícios?",
-    alternativas: [
-      {
-        texto: "Combinar responsabilidades, horários e uma quantidade inicial viável.",
-        afirmacao: ["Dividiu as tarefas e organizou uma produção compatível com a equipe."],
-        tipo: "avancar",
-      },
-      {
-        texto: "Confirmar se todos sabem preparar e armazenar os alimentos.",
-        afirmacao: ["Alinhou as tarefas e os cuidados necessários para trabalhar com alimentos."],
-        tipo: "salto",
-      },
-      {
-        texto: "Deixar todo o trabalho para uma pessoa e decidir os horários no dia da venda.",
-        afirmacao: ["Deixou as responsabilidades indefinidas e aumentou o risco de atrasos."],
-        tipo: "gameover",
-      },
-    ],
-  },
-  {
+    caminho: "A",
     enunciado:
-      "Depois do primeiro dia de vendas, alguns lanches sobraram e outros acabaram rápido. O que fazer?",
+      "Na demonstração, os colegas perguntam sobre preço, higiene e impacto das embalagens. Como melhorar a proposta?",
     alternativas: [
       {
-        texto: "Registrar as vendas e ajustar a quantidade de cada opção.",
-        afirmacao: ["Usou os resultados das vendas para planejar melhor a próxima produção."],
+        texto: "Revisar o preço, os cuidados de preparo e as opções de embalagem.",
+        afirmacao: ["Revisou preço, higiene e embalagens com responsabilidade."],
         tipo: "avancar",
+        proxima: 6,
       },
       {
-        texto: "Perguntar aos clientes o que gostaram e comparar com os registros.",
-        afirmacao: ["Combinou dados das vendas com opiniões dos clientes."],
+        texto: "Retomar as fontes e explicar os limites das informações apresentadas.",
+        afirmacao: ["Revisou as fontes e explicou os limites das informações."],
         tipo: "salto",
+        proxima: 3,
       },
       {
-        texto: "Produzir ainda mais de tudo sem conferir os registros.",
-        afirmacao: ["Ignorou os resultados e poderia repetir desperdícios."],
+        texto: "Publicar dados pessoais dos colegas sem autorização.",
+        afirmacao: ["Expôs dados pessoais dos colegas sem autorização."],
         tipo: "gameover",
+        proxima: 6,
+        disponivel: true,
+        mensagem:
+          "A exposição de dados pessoais prejudicou os colegas e o projeto. Você precisa recomeçar.",
       },
     ],
   },
   {
+    caminho: "A",
     enunciado:
-      "Vocês venderam bastante, mas não sabem se tiveram lucro. Como conferir?",
+      "O projeto está quase pronto para ser apresentado. O que você precisa organizar antes da feira escolar?",
     alternativas: [
       {
-        texto: "Somar as receitas, registrar os gastos e comparar os valores.",
-        afirmacao: ["Conferiu receitas e despesas para entender o resultado financeiro."],
+        texto: "Finalizar a apresentação com custos, fontes e os cuidados do projeto.",
+        afirmacao: ["Organizou a apresentação com custos, fontes e cuidados necessários."],
         tipo: "avancar",
+        proxima: 11,
       },
       {
-        texto: "Revisar comprovantes e conversar com a equipe para localizar gastos que faltaram.",
-        afirmacao: ["Revisou os registros financeiros antes de tirar conclusões."],
+        texto: "Revisar o protótipo e confirmar se o preço cabe no orçamento.",
+        afirmacao: ["Revisou o protótipo e confirmou o orçamento do produto."],
         tipo: "salto",
+        proxima: 4,
       },
       {
-        texto: "Considerar todo o dinheiro recebido como lucro e gastar sem fazer as contas.",
-        afirmacao: ["Confundiu receita com lucro e deixou de controlar o dinheiro do projeto."],
-        tipo: "gameover",
+        texto: "Levar o material ao encontro com estudantes e moradores do bairro.",
+        afirmacao: ["Levou o material do projeto para conversar com a comunidade."],
+        tipo: "trocar",
+        proxima: 10,
+        disponivel: true,
       },
     ],
   },
   {
+    caminho: "B",
     enunciado:
-      "A feira está chegando. O que apresentar para mostrar o impacto e a viabilidade do negócio?",
+      "A direção confirma que projetos estudantis podem acontecer, desde que sigam as regras. Como você vai verificar o que a comunidade precisa?",
     alternativas: [
       {
-        texto: "Mostrar resultados reais, aprendizados e próximos passos para melhorar o projeto.",
-        afirmacao: ["Apresentou resultados reais e demonstrou como pretende continuar aprendendo."],
+        texto: "Fazer perguntas sobre preferências, preços e necessidades dos estudantes.",
+        afirmacao: ["Pesquisou preferências, preços e necessidades dos estudantes."],
         tipo: "avancar",
+        proxima: 8,
       },
       {
-        texto: "Revisar os dados e ensaiar respostas para as perguntas da comunidade.",
-        afirmacao: ["Revisou os dados e preparou a equipe para conversar com o público."],
+        texto: "Voltar à direção para confirmar os detalhes que ainda geram dúvida.",
+        afirmacao: ["Confirmou com a direção os detalhes que ainda geravam dúvida."],
         tipo: "salto",
+        proxima: 2,
       },
       {
-        texto: "Inventar números de vendas para fazer o projeto parecer maior.",
-        afirmacao: ["Pensou em divulgar dados falsos e comprometer a confiança no projeto."],
+        texto: "Acusar publicamente um colega de espalhar a mensagem sem ter provas.",
+        afirmacao: ["Acusou publicamente um colega sem verificar os fatos."],
         tipo: "gameover",
+        proxima: 8,
+        disponivel: true,
+        mensagem:
+          "A acusação sem provas prejudicou um colega e interrompeu a investigação. Você precisa recomeçar.",
       },
     ],
+  },
+  {
+    caminho: "B",
+    enunciado:
+      "A pesquisa indica que estudantes e famílias querem opções acessíveis e menos desperdício. Como transformar essas informações em uma ação útil?",
+    alternativas: [
+      {
+        texto: "Planejar uma orientação comunitária com dados e sugestões verificadas.",
+        afirmacao: ["Planejou uma orientação para a comunidade com dados verificados."],
+        tipo: "avancar",
+        proxima: 9,
+      },
+      {
+        texto: "Organizar um encontro com moradores para apresentar as necessidades encontradas.",
+        afirmacao: ["Organizou um encontro para compartilhar os resultados da pesquisa."],
+        tipo: "salto",
+        proxima: 10,
+      },
+      {
+        texto: "Preparar uma demonstração de produto para a turma com base na pesquisa.",
+        afirmacao: ["Usou a pesquisa da comunidade para preparar uma demonstração escolar."],
+        tipo: "trocar",
+        proxima: 4,
+        disponivel: true,
+      },
+    ],
+  },
+  {
+    caminho: "B",
+    enunciado:
+      "Você está preparando uma orientação para a comunidade. Como garantir que as recomendações sejam úteis e confiáveis?",
+    alternativas: [
+      {
+        texto: "Revisar os dados e indicar como as informações foram verificadas.",
+        afirmacao: ["Revisou os dados e explicou como as informações foram verificadas."],
+        tipo: "avancar",
+        proxima: 10,
+      },
+      {
+        texto: "Voltar às pessoas consultadas para confirmar respostas importantes.",
+        afirmacao: ["Confirmou com a comunidade as respostas mais importantes."],
+        tipo: "salto",
+        proxima: 7,
+      },
+      {
+        texto: "Criar informações falsas para convencer mais pessoas a participar.",
+        afirmacao: ["Divulgou informações falsas para atrair participantes."],
+        tipo: "gameover",
+        proxima: 10,
+        disponivel: true,
+        mensagem:
+          "As informações falsas prejudicaram a confiança da comunidade. Você precisa recomeçar.",
+      },
+    ],
+  },
+  {
+    caminho: "B",
+    enunciado:
+      "Chegou a hora de conversar com estudantes e moradores. Como organizar o encontro sobre as necessidades e as ideias levantadas?",
+    alternativas: [
+      {
+        texto: "Apresentar os resultados e abrir espaço para perguntas e novas sugestões.",
+        afirmacao: ["Preparou um encontro aberto para apresentar resultados e ouvir sugestões."],
+        tipo: "avancar",
+        proxima: 12,
+      },
+      {
+        texto: "Revisar as recomendações e confirmar os dados antes do encontro.",
+        afirmacao: ["Revisou as recomendações e conferiu os dados antes do encontro."],
+        tipo: "salto",
+        proxima: 8,
+      },
+      {
+        texto: "Expor conversas privadas de participantes sem pedir autorização.",
+        afirmacao: ["Expôs conversas privadas sem autorização."],
+        tipo: "gameover",
+        proxima: 12,
+        disponivel: true,
+        mensagem:
+          "A exposição de conversas privadas violou a confiança dos participantes. Você precisa recomeçar.",
+      },
+    ],
+  },
+  {
+    caminho: "A",
+    final: "vitoria",
+    enunciado:
+      "Você apresentou o projeto na feira escolar, explicou os custos e os cuidados de produção. A iniciativa está pronta para seguir com responsabilidade. Missão cumprida!",
+    alternativas: [],
+  },
+  {
+    caminho: "B",
+    final: "vitoria",
+    enunciado:
+      "Você compartilhou os resultados da pesquisa com estudantes e moradores e ouviu novas ideias. A comunidade agora pode planejar iniciativas mais conscientes. Missão cumprida!",
+    alternativas: [],
   },
 ];

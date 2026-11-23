@@ -10,19 +10,15 @@ const tituloResultado = document.querySelector(".titulo-resultado");
 const telaInicial = document.querySelector(".tela-inicial");
 const botaoIniciar = document.querySelector(".iniciar-btn");
 const botaoJogarNovamente = document.querySelector(".novamente-btn");
-const botaoCreditos = document.querySelector(".creditos-btn");
-const telaCreditos = document.querySelector(".tela-creditos");
-const botaoVoltarInicio = document.querySelector(".voltar-inicio-btn");
 
 let atual = 0;
 let historiaFinal = "";
 let faseDaPartida = "inicio";
 let erros = 0;
+let perguntasVisitadas = new Set();
 
 botaoIniciar.addEventListener("click", iniciaJogo);
 botaoJogarNovamente.addEventListener("click", reiniciaJogo);
-botaoCreditos.addEventListener("click", mostraCreditos);
-botaoVoltarInicio.addEventListener("click", reiniciaJogo);
 
 function iniciaJogo() {
   reiniciaJogo();
@@ -39,6 +35,7 @@ function reiniciaJogo() {
   historiaFinal = "";
   faseDaPartida = "inicio";
   erros = 0;
+  perguntasVisitadas = new Set();
 
   caixaPerguntas.textContent = "";
   caixaAlternativas.replaceChildren();
@@ -51,18 +48,35 @@ function reiniciaJogo() {
   caixaPerguntas.style.display = "none";
   caixaAlternativas.style.display = "none";
   caixaResultado.style.display = "none";
-  telaCreditos.style.display = "none";
-  botaoCreditos.style.display = "none";
   botaoJogarNovamente.style.display = "inline-block";
 }
 
 function mostraPergunta() {
   const perguntaAtual = perguntas[atual];
+  perguntasVisitadas.add(atual);
 
   caixaPerguntas.textContent = perguntaAtual.enunciado.replace(/você/gi, nome);
   caixaAlternativas.replaceChildren();
 
-  for (const alternativa of embaralha(perguntaAtual.alternativas)) {
+  if (perguntaAtual.final === "vitoria") {
+    mostraVitoria(caixaPerguntas.textContent);
+    return;
+  }
+
+  const alternativasDisponiveis = perguntaAtual.alternativas.filter(
+    (alternativa) =>
+      !Number.isInteger(alternativa.proxima) ||
+      !perguntasVisitadas.has(alternativa.proxima),
+  );
+
+  if (alternativasDisponiveis.length === 0) {
+    mostraVitoria(
+      "Você chegou ao fim das perguntas disponíveis neste percurso. Sua jornada empreendedora foi concluída!",
+    );
+    return;
+  }
+
+  for (const alternativa of embaralha(alternativasDisponiveis)) {
     const botao = document.createElement("button");
     botao.textContent = alternativa.texto;
     botao.disabled = alternativa.disponivel === false;
@@ -82,28 +96,43 @@ function respostaSelecionada(opcaoSelecionada) {
     return;
   }
 
-  const escolhaDeRisco = opcaoSelecionada.tipo === "gameover";
-  if (escolhaDeRisco) {
-    erros += 1;
+  const destino = opcaoSelecionada.proxima;
+  if (!Number.isInteger(destino) || perguntas[destino] === undefined) {
+    console.error("Destino inválido:", destino);
+    return;
+  }
+
+  if (perguntasVisitadas.has(destino)) {
+    console.error("Essa pergunta já foi visitada:", destino);
+    return;
+  }
+
+  const origem = perguntas[atual];
+  const chegada = perguntas[destino];
+  const mudouDeCaminho = origem.caminho !== chegada.caminho;
+
+  if (atual !== 0 && mudouDeCaminho && opcaoSelecionada.tipo !== "trocar") {
+    console.error("Mudança de caminho sem o tipo trocar.");
+    return;
+  }
+
+  if (opcaoSelecionada.tipo === "trocar" && !mudouDeCaminho) {
+    console.error("A troca deve levar a outro caminho.");
+    return;
   }
 
   const afirmacao = aleatorio(opcaoSelecionada.afirmacao);
   historiaFinal += afirmacao + " ";
 
-  if (atual === perguntas.length - 1) {
-    if (erros >= 3) {
-      mostraGameOver(
-        "As decisões de risco se acumularam durante as 10 etapas e a empresa entrou em falência.",
-      );
-    } else {
-      mostraVitoria(
-        "Você concluiu as 10 etapas, apresentou sua ideia na feira e mostrou como ela atende a uma necessidade real. Missão cumprida: você venceu!",
-      );
+  if (opcaoSelecionada.tipo === "gameover") {
+    erros += 1;
+    if (erros >= 2) {
+      mostraGameOver(opcaoSelecionada.mensagem);
+      return;
     }
-    return;
   }
 
-  atual += 1;
+  atual = destino;
   mostraPergunta();
 }
 
@@ -134,8 +163,6 @@ function mostraGameOver(mensagem) {
   textoResultado.textContent = mensagem + "\n\nSuas escolhas nesta tentativa:\n" + historiaFinal;
   botaoJogarNovamente.textContent = "Recomeçar do início";
   botaoJogarNovamente.style.display = "inline-block";
-  botaoCreditos.style.display = "none";
-  telaCreditos.style.display = "none";
 }
 
 function mostraVitoria(mensagem) {
@@ -153,22 +180,8 @@ function mostraVitoria(mensagem) {
   imagemResultado.alt = "Ilustração de sucesso";
   imagemResultado.style.display = "block";
   textoResultado.textContent = mensagem + "\n\nSeu percurso nesta partida:\n" + historiaFinal;
-  botaoJogarNovamente.style.display = "none";
-  botaoCreditos.style.display = "inline-block";
-  telaCreditos.style.display = "none";
-}
-
-function mostraCreditos() {
-  if (faseDaPartida !== "vitoria") {
-    return;
-  }
-
-  faseDaPartida = "creditos";
-  telaInicial.style.display = "none";
-  caixaPerguntas.style.display = "none";
-  caixaAlternativas.style.display = "none";
-  caixaResultado.style.display = "none";
-  telaCreditos.style.display = "block";
+  botaoJogarNovamente.textContent = "Recomeçar do início";
+  botaoJogarNovamente.style.display = "inline-block";
 }
 
 reiniciaJogo();
